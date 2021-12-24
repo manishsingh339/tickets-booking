@@ -2,6 +2,7 @@ package db
 
 import (
 	"context"
+	"log"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -37,8 +38,11 @@ func NewDB(config *Config) (*mongo.Client, error) {
 func Init(config *Config) error {
 	d, err := NewDB(config)
 	if err != nil {
+		log.Println("Error while connecting to DB")
 		return err
 	}
+	log.Println("Connected with DB")
+
 	db = d
 	return nil
 }
