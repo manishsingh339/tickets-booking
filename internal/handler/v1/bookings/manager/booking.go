@@ -1,11 +1,11 @@
 package bookings
 
 import (
-	"fmt"
 	"io"
 	"log"
 	"net/http"
 	CreateTicket "tickets/booking/internal/handler/v1/bookings/store"
+	GetTickets "tickets/booking/internal/handler/v1/bookings/store"
 	"tickets/booking/internal/handler/v1/bookings/store/ticket"
 	"time"
 
@@ -24,10 +24,15 @@ func AddTicket(w http.ResponseWriter, req *http.Request) {
 		UpdatedAt:   time.Now(),
 		EventTime:   time.Now(),
 		EventTitle:  "Event Title",
-		Description: "Some description!",
+		Description: "Some description",
 	}
 
 	CreateTicket.Save(&_ticket)
 
-	fmt.Println(_ticket)
+	io.WriteString(w, "Ticket Created!\n")
+}
+
+func Tickets(w http.ResponseWriter, req *http.Request) {
+	GetTickets.Get()
+	io.WriteString(w, "Ticket Get!\n")
 }

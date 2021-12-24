@@ -6,6 +6,16 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+type dbConfig struct {
+	DB         string
+	Collection string
+}
+
+var DBConfig = dbConfig{
+	DB:         "ticket_booking",
+	Collection: "ticket",
+}
+
 type Ticket struct {
 	ID          primitive.ObjectID `bson:"_id"`
 	CreatedAt   time.Time          `bson:"created_at"`

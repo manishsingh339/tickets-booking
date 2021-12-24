@@ -13,6 +13,7 @@ func main() {
 
 	http.HandleFunc("/ping", bookings.Ping)
 	http.HandleFunc("/ticket", bookings.AddTicket)
+	http.HandleFunc("/tickets", bookings.Tickets)
 	log.Println("Listing for requests at http://localhost:8000/ticket")
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
