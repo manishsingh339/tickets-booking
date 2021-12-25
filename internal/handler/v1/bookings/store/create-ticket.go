@@ -13,7 +13,7 @@ func Save(_ticket *ticket.Ticket) error {
 	log.Println("Got DB Collection: ", _ticket)
 
 	//Create a handle to the respective collection in the database.
-	collection := client.Database(ticket.DBConfig.DB).Collection(ticket.DBConfig.DB)
+	collection := client.Database(ticket.DBConfig.DB).Collection(ticket.DBConfig.Collection)
 
 	//Perform InsertOne operation & validate against the error.
 	_, err := collection.InsertOne(context.TODO(), _ticket)

@@ -1,6 +1,7 @@
 package bookings
 
 import (
+	"encoding/json"
 	"io"
 	"log"
 	"net/http"
@@ -33,6 +34,11 @@ func AddTicket(w http.ResponseWriter, req *http.Request) {
 }
 
 func Tickets(w http.ResponseWriter, req *http.Request) {
-	GetTickets.Get()
-	io.WriteString(w, "Ticket Get!\n")
+	data, error := GetTickets.Get()
+	if error != nil {
+		panic("Error: Language cannot be nil")
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(data)
 }
